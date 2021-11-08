@@ -16,7 +16,7 @@
                   <mat-label>Name</mat-label>
                   <input matInput placeholder="User Name" name="customerName" formControlName="customerName" value="">
                   <div *ngIf="!customerName?.valid && (customerName?.dirty ||customerName?.touched)">
-                    <div [hidden]="!customerName.errors.required">
+                    <div [hidden]="!customerName?.errors?.required">
                       Name is required
                     </div>
                   </div>
@@ -30,18 +30,17 @@
                 <label>Age</label>
               </div>
               <div class="col-8">
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>Age</mat-label>
-              <input type="number" matInput placeholder="age" name="age" formControlName="age"
-                value="">
-                <div *ngIf="!age?.valid && (age?.dirty ||age?.touched)">
-                  <div [hidden]="!age.errors.required">
-                    Age required
+                <mat-form-field class="w-100" appearance="fill">
+                  <mat-label>Age</mat-label>
+                  <input type="number" matInput placeholder="age" name="age" formControlName="age" value="">
+                  <div *ngIf="!age?.valid && (age?.dirty ||age?.touched)">
+                    <div [hidden]="!age?.errors?.required">
+                      Age required
+                    </div>
                   </div>
-                </div>
-            </mat-form-field>
-          </div>
-        </div>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
           <div class="col">
             <div class="row">
@@ -49,31 +48,30 @@
                 <label>Address</label>
               </div>
               <div class="col-8">
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>Address</mat-label>
-              <input  matInput placeholder="Address" name="address" formControlName="address"
-                value="">
-                <div *ngIf="!address?.valid && (address?.dirty ||address?.touched)">
-                  <div [hidden]="!address.errors.required">
-                    address required
+                <mat-form-field class="w-100" appearance="fill">
+                  <mat-label>Address</mat-label>
+                  <input matInput placeholder="Address" name="address" formControlName="address" value="">
+                  <div *ngIf="!address?.valid && (address?.dirty ||address?.touched)">
+                    <div [hidden]="!address?.errors?.required">
+                      address required
+                    </div>
                   </div>
-                </div>
-            </mat-form-field>
-          </div>
-        </div>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
           <div class="row">
-          <div class="col-2"></div>
-          <div class="col-8">
-          <button [disabled]="customerForm.invalid" class="btn btn-primary">Submit</button>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-primary" (click)="gobacktoDashboard();">Cancel</button>
-        </div>
-        </div>
+            <div class="col-2"></div>
+            <div class="col-8">
+              <button [disabled]="customerForm.invalid" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-primary" (click)="gobacktoDashboard();">Cancel</button>
+            </div>
+          </div>
         </form>
         <mat-error>
-          <span *ngIf="errormsg">{{this.errormsg}}</span>
+          <span *ngIf="errorMsg">{{this.errorMsg}}</span>
         </mat-error>
       </mat-card>
     </div>

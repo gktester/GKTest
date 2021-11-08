@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import {UserService, AuthenticationService,JwtService } from '../core/services';
 import { Credentials } from 'src/app/shared/models';
 
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
     const credentials: Credentials = {
       username: this.loginForm.value.userName,
       password: this.loginForm.value.password
@@ -43,8 +42,7 @@ export class LoginComponent implements OnInit {
     this.userService.attemptAuth(credentials).subscribe((res:any) => {
       if(res) {
         this.errormsg  = '';
-        this.jwtService.saveToken(res.key);
-        window.localStorage['firstName'] = res.firstName;
+        this.jwtService.saveToken(res.key,res.firstName);
         this.authenticationService.populate(res);
         this.authenticationService.dashboardRoute();
       }

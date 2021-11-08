@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService, JwtService, SnackBarService, UserService } from '../core/services';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-customer',
@@ -10,24 +10,24 @@ import {Location} from '@angular/common';
 })
 export class CustomerComponent implements OnInit {
 
-  customerForm:any;
-  errormsg:any;
+  customerForm: FormGroup;
+  errorMsg = '';
   constructor(
-              private formBuilder: FormBuilder,
-              private  authenticationService : AuthenticationService,
-              private  userService : UserService,
-              private jwtService: JwtService,
-              private _location: Location,
-              private snackbarService: SnackBarService
-    ) {
-    this.customerForm =  this.formBuilder.group({
-      customerName: ['',[Validators.required]],
-      age: ['',[Validators.required]],
-      address: ['',[Validators.required]]
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private _location: Location,
+    private snackbarService: SnackBarService
+  ) {
+    this.customerForm = this.formBuilder.group({
+      customerName: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      address: ['', [Validators.required]]
     })
-   }
+  }
+  ngOnInit(): void {
 
-   get customerName() {
+  }
+  get customerName() {
     return this.customerForm.get('customerName');
   }
   get age() {
@@ -36,8 +36,7 @@ export class CustomerComponent implements OnInit {
   get address() {
     return this.customerForm.get('address');
   }
-  ngOnInit(): void {
-  }
+
 
   onSubmit() {
     const userData: any = {
@@ -45,15 +44,15 @@ export class CustomerComponent implements OnInit {
       customerAge: this.customerForm.value.age,
       customerAddress: this.customerForm.value.address,
     }
-    this.userService.saveCustomerInfo(userData).subscribe((res:any) => {
+    this.userService.saveCustomerInfo(userData).subscribe((res: any) => {
       this.snackbarService.success('Successfully Created!');
       this.customerForm.reset();
     }, (err) => {
-      this.errormsg = err.error.error
+      this.errorMsg = err.error.error || '';
     });
   }
 
-  gobacktoDashboard(){
+  gobacktoDashboard() {
     this._location.back();
   }
 

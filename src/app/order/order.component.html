@@ -11,15 +11,13 @@
         <th scope="col">Order Amount</th>
       </tr>
     </thead>
-    <tbody *ngIf="customerdataSource">
-      <tr  *ngFor="let customerdata of customerdataSource;" >
+    <tbody *ngIf="customerDataSource">
+      <tr  *ngFor="let customerdata of customerDataSource;" >
         <td>{{customerdata.customer.customerName}}</td>
         <td>{{customerdata.orderDate* 1000 | date}}</td>
         <td>{{customerdata.orderDetail}}</td>
         <td>{{customerdata.orderAmount}}</td>
       </tr>
-
-
     </tbody>
   </table>
 </div>

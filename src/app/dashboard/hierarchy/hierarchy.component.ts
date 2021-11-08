@@ -4,8 +4,10 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { UserService } from 'src/app/core/services';
 import { map } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { Hierarchy, NodeChild } from 'src/app/shared/models';
 
-interface ExampleFlatNode {
+
+interface FlatNode {
   expandable: boolean;
   name: string;
   level: number;
@@ -16,8 +18,8 @@ interface ExampleFlatNode {
   styleUrls: ['./hierarchy.component.scss']
 })
 export class HierarchyComponent implements OnInit {
-  public treeData = [];
-  constructor(private hierarchyService: UserService, private _location:Location) {
+  public treeData: NodeChild[] = [];
+  constructor(private userService: UserService, private _location: Location) {
   }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class HierarchyComponent implements OnInit {
     };
   }
 
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
+  treeControl = new FlatTreeControl<FlatNode>(
     node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(
@@ -40,17 +42,22 @@ export class HierarchyComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  hasChild = (_: number, node: FlatNode) => node.expandable;
 
   getTreeData() {
-    this.hierarchyService.getNodeHierarchy().subscribe((response: any) => {
-      console.log(response);
-      this.treeData = response.entity.nodeStandardMetadata;
-      this.dataSource.data = [response.entity.nodeStandardMetadata];
+    this.userService.getNodeHierarchy().pipe(map((hierarchy: Hierarchy) => {
+      return [{
+        nodeId: 'temp-1',
+        nodeName: 'GK_UI_TEST',
+        children: [hierarchy.entity.nodeStandardMetadata],
+      }];
+    })).subscribe((mappedHierarchy: NodeChild[]) => {
+      this.treeData = mappedHierarchy;
+      this.dataSource.data = mappedHierarchy;
     });
-}
+  }
 
-gobacktoDashboard(){
-  this._location.back();
-}
+  goBackToDashboard() {
+    this._location.back();
+  }
 }

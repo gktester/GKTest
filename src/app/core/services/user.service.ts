@@ -4,7 +4,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CurrentUser } from 'src/app/shared/models';
+import { CurrentUser, Hierarchy } from 'src/app/shared/models';
 
 import { AuthToken, Credentials } from 'src/app/shared/models';
 
@@ -22,8 +22,9 @@ export class UserService {
     return this.http.get(`${environment.api}/login?username=${credentials.username}&password=${credentials.password}`);
   }
 
-  getNodeHierarchy() {
-    return this.http.get('https://dev.greenkoncepts.com/gktest/node-hierarchy?token='+localStorage.getItem('jwtToken'));
+  getNodeHierarchy():Observable<Hierarchy>{
+    let key = window.localStorage['jwtToken'];
+    return this.http.get<Hierarchy>(`${environment.api}/node-hierarchy?token=${key}`);
   }
 
   saveCustomerInfo(userdata:any){

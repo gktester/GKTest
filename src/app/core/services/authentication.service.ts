@@ -60,19 +60,8 @@ export class AuthenticationService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  roleBasedRoute() {
-    // let role: Role = this.currentUserSubject.value.currentRole;
-    // switch (true) {
-    //   case Role['ROLE_PAYEE'] == role:
-    //     this.router.navigateByUrl('payee/dashboard');
-    //     break;
-    //   case Role['ROLE_PAYER'] == role:
-    //     this.router.navigateByUrl('payer/dashboard');
-    //     break;
-    //   case Role['ROLE_SUPER_ADMIN'] == role:
-    //     this.router.navigateByUrl('super-admin/dda-request-approve');
-    //     break;
-    // }
+  dashboardRoute() {
+    this.router.navigateByUrl('dashboard');
   }
 
   getUserSubjectValue(): CurrentUser {

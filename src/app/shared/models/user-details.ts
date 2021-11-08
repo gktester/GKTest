@@ -6,3 +6,7 @@ export interface CurrentUser {
     lastName?: string;
     token: string;
 }
+export interface Credentials {
+  username: string;
+  password: string;
+}

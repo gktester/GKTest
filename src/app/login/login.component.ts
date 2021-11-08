@@ -11,6 +11,7 @@ import { Credentials } from 'src/app/shared/models';
 export class LoginComponent implements OnInit {
 
   loginForm:any;
+  errormsg:any;
   constructor(
               private formBuilder: FormBuilder,
               private  authenticationService : AuthenticationService,
@@ -39,14 +40,15 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.value.userName,
       password: this.loginForm.value.password
     }
-    this.userService.attemptAuth(credentials).subscribe((res) => {
+    this.userService.attemptAuth(credentials).subscribe((res:any) => {
       if(res) {
-       // this.jwtService.saveToken(res.key);
-        this.authenticationService.populate();
+        this.errormsg  = '';
+        this.jwtService.saveToken(res.key);
+        this.authenticationService.populate(res);
         this.authenticationService.dashboardRoute();
       }
     }, (err) => {
-
+      this.errormsg = err.error.error
     });
   }
 

@@ -1,0 +1,31 @@
+<header>
+  <nav class="nav-shadow">
+      <div class="container-fluid">
+          <div class="row">
+               <div class="col-8">
+                  <span class="d-inline-block d-sm-none">
+                      <button mat-icon-button [matMenuTriggerFor]="navigationMenu" aria-label="navigation menu">
+                          <mat-icon>menu</mat-icon>
+                      </button>
+                      <mat-menu #navigationMenu>
+                        <button mat-menu-item>
+                            <span>Test</span>
+                        </button>
+                    </mat-menu>
+                  </span>
+                  <div class="col-3 d-none d-sm-inline-block">
+                      <button class="h-100" mat-button  ><mat-icon>home</mat-icon></button>
+                  </div>
+              </div>
+              <div class="col-4 text-end">
+                  <button class="w-100 h-100 d-none d-sm-block text-end" mat-button [matMenuTriggerFor]="usermenu">test<mat-icon>expand_more</mat-icon></button>
+                  <button class="w-100 h-100 d-block d-sm-none text-end" mat-button [matMenuTriggerFor]="usermenu"><mat-icon>more_vert</mat-icon></button>
+                  <mat-menu #usermenu xPosition="before">
+                      <button mat-menu-item ><mat-icon>account_circle</mat-icon>Profile</button>
+                      <button mat-menu-item (click)="logOut()"><mat-icon>logout</mat-icon>Log Out</button>
+                  </mat-menu>
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>

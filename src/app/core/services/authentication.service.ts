@@ -28,14 +28,14 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  populate() {
+  populate(userdata:any) {
     if (this.jwtService.getToken()) {
       // decode token for user id
-      const decodedToken = this.jwtService.decodeToken();
-
-      let user: CurrentUser = {
-        id: decodedToken.uid,
-        token: this.jwtService.getToken() as string,
+       let user: CurrentUser = {
+        firstName: userdata.firstname,
+        lastName: userdata.lastname,
+        userName: userdata.userName,
+        key: userdata.key
       };
       this.setAuth(user);
     }
@@ -61,7 +61,7 @@ export class AuthenticationService {
   }
 
   dashboardRoute() {
-    this.router.navigateByUrl('dashboard');
+    this.router.navigate(['dashboard']);
   }
 
   getUserSubjectValue(): CurrentUser {

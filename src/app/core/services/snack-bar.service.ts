@@ -8,7 +8,7 @@ export class SnackBarService {
 
   snackBarConfig!: MatSnackBarConfig<any>;
   snackBarRef: MatSnackBarRef<any> | undefined;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   snackBarAutoHide = '5000';
 

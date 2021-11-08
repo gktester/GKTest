@@ -17,13 +17,28 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getUserDetails(): Observable<CurrentUser> {
-    return this.http.get(`${environment.api}/user`).pipe(map(user => user as CurrentUser));
-  }
 
   attemptAuth(credentials: Credentials) {
-    console.log(credentials);
     return this.http.get(`${environment.api}/login?username=${credentials.username}&password=${credentials.password}`);
+  }
+
+  getNodeHierarchy() {
+    return this.http.get('https://dev.greenkoncepts.com/gktest/node-hierarchy?token='+localStorage.getItem('jwtToken'));
+  }
+
+  saveCustomerInfo(userdata:any){
+    let key = window.localStorage['jwtToken'];
+    return this.http.post(`${environment.api}/createCustomer?token=${key}`, userdata);
+  }
+
+  getOrderDetails() {
+    let key = window.localStorage['jwtToken'];
+    return this.http.get(`${environment.api}/getAllOrders?token=${key}`);
+  }
+
+  logout(){
+    let key = window.localStorage['jwtToken'];
+    return this.http.get(`${environment.api}/logout?token=${key}`);
   }
 
 }

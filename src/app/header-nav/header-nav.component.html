@@ -18,10 +18,9 @@
                   </div>
               </div>
               <div class="col-4 text-end">
-                  <button class="w-100 h-100 d-none d-sm-block text-end" mat-button [matMenuTriggerFor]="usermenu">test<mat-icon>expand_more</mat-icon></button>
+                  <button class="w-100 h-100 d-none d-sm-block text-end" mat-button [matMenuTriggerFor]="usermenu">{{this.userName | titlecase}}<mat-icon>expand_more</mat-icon></button>
                   <button class="w-100 h-100 d-block d-sm-none text-end" mat-button [matMenuTriggerFor]="usermenu"><mat-icon>more_vert</mat-icon></button>
                   <mat-menu #usermenu xPosition="before">
-                      <button mat-menu-item ><mat-icon>account_circle</mat-icon>Profile</button>
                       <button mat-menu-item (click)="logOut()"><mat-icon>logout</mat-icon>Log Out</button>
                   </mat-menu>
               </div>

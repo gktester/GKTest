@@ -29,14 +29,16 @@ export class AuthenticationService {
   }
 
   populate(userdata:any) {
-    if (this.jwtService.getToken()) {
+
+    if (userdata) {
       // decode token for user id
        let user: CurrentUser = {
-        firstName: userdata.firstname,
-        lastName: userdata.lastname,
+        firstName: userdata.firstName,
+        lastName: userdata.lastName,
         userName: userdata.userName,
         key: userdata.key
       };
+
       this.setAuth(user);
     }
     else {
@@ -66,6 +68,11 @@ export class AuthenticationService {
 
   getUserSubjectValue(): CurrentUser {
     return this.currentUserSubject.value;
+  }
+
+  logoutApp(){
+    this.jwtService.destroyToken();
+    this.router.navigate(['login']);
   }
 
 }

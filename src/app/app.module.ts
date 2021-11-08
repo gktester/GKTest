@@ -1,3 +1,4 @@
+import { HeaderNavModule } from './header-nav/header-nav.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    HeaderNavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

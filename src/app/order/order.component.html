@@ -1,0 +1,25 @@
+<app-header-nav></app-header-nav>
+<div class="container">
+<button class="btn btn-primary" (click)="gobacktoDashboard();">Back</button>
+<h2>View Customer Details</h2>
+  <table class="table w-100">
+    <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Order Detail</th>
+        <th scope="col">Order Amount</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="customerdataSource">
+      <tr  *ngFor="let customerdata of customerdataSource;" >
+        <td>{{customerdata.customer.customerName}}</td>
+        <td>{{customerdata.orderDate* 1000 | date}}</td>
+        <td>{{customerdata.orderDetail}}</td>
+        <td>{{customerdata.orderAmount}}</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</div>

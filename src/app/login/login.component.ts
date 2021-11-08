@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       if(res) {
         this.errormsg  = '';
         this.jwtService.saveToken(res.key);
+        window.localStorage['firstName'] = res.firstName;
         this.authenticationService.populate(res);
         this.authenticationService.dashboardRoute();
       }

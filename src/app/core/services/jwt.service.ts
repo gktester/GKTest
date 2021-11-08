@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 
 import { DecodedAuthToken } from 'src/app/shared/models';
-@Injectable({ 
-  providedIn: "root" 
+@Injectable({
+  providedIn: "root"
 })
-export class JwtService {  
+export class JwtService {
 
   getToken(): String {
     return window.localStorage['jwtToken'];
@@ -17,8 +17,10 @@ export class JwtService {
   }
 
   destroyToken() {
+
     window.localStorage.removeItem('jwtToken');
-    window.localStorage.removeItem('role');
+    window.localStorage.removeItem('userdata');
+    window.localStorage.removeItem('firstName');
   }
 
   decodeToken(): DecodedAuthToken {

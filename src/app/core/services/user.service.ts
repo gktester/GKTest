@@ -22,15 +22,8 @@ export class UserService {
     return this.http.get(`${environment.api}/login?username=${credentials.username}&password=${credentials.password}`);
   }
 
-  getNodeHierarchy():Observable<Hierarchy>{
-    let key = window.localStorage['jwtToken'];
-    return this.http.get<Hierarchy>(`${environment.api}/node-hierarchy?token=${key}`);
-  }
-
-  saveCustomerInfo(userdata:any){
-    let key = window.localStorage['jwtToken'];
-    return this.http.post(`${environment.api}/createCustomer?token=${key}`, userdata);
-  }
+  //node-hierarchy
+  ///createCustomer
 
   getOrderDetails() {
     let key = window.localStorage['jwtToken'];
